@@ -31,6 +31,13 @@ export const Posts: CollectionConfig = {
       },
     },
     {
+      name: 'excerpt',
+      type: 'textarea',
+      admin: {
+        description: 'A short summary for SEO and previews',
+      },
+    },
+    {
       name: 'content',
       type: 'richText',
       required: true,

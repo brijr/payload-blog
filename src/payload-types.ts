@@ -86,7 +86,6 @@ export interface Config {
   db: {
     defaultIDType: number;
   };
-  fallbackLocale: null;
   globals: {};
   globalsSelect: {};
   locale: null;
@@ -168,6 +167,10 @@ export interface Post {
   title: string;
   slug: string;
   publishedAt?: string | null;
+  /**
+   * A short summary for SEO and previews
+   */
+  excerpt?: string | null;
   content: {
     root: {
       type: string;
@@ -182,6 +185,14 @@ export interface Post {
       version: number;
     };
     [k: string]: unknown;
+  };
+  meta?: {
+    title?: string | null;
+    description?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (number | null) | Media;
   };
   updatedAt: string;
   createdAt: string;
@@ -295,7 +306,15 @@ export interface PostsSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
   publishedAt?: T;
+  excerpt?: T;
   content?: T;
+  meta?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        image?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
 }

@@ -1,5 +1,6 @@
 import { payloadCloudPlugin } from '@payloadcms/payload-cloud'
 import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob'
+import { seoPlugin } from '@payloadcms/plugin-seo'
 import { postgresAdapter } from '@payloadcms/db-postgres'
 import { fileURLToPath } from 'url'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
@@ -11,6 +12,8 @@ import path from 'node:path'
 import { Users } from '@/collections/Users'
 import { Media } from '@/collections/Media'
 import { Posts } from '@/collections/Posts'
+
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://yourdomain.com'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -42,6 +45,13 @@ export default buildConfig({
         media: true,
       },
       token: process.env.BLOB_READ_WRITE_TOKEN || '',
+    }),
+    seoPlugin({
+      collections: ['posts'],
+      uploadsCollection: 'media',
+      generateTitle: ({ doc }) => `${doc?.title} — Payload Blog`,
+      generateDescription: ({ doc }) => doc?.excerpt || '',
+      generateURL: ({ doc }) => `${siteUrl}/posts/${doc?.slug}`,
     }),
   ],
 })
