@@ -16,7 +16,7 @@ export const Header = () => {
       </Link>
       <div className="flex gap-2">
         <Button asChild variant="ghost">
-          <Link href="/blog">Blog</Link>
+          <Link href="/posts">Posts</Link>
         </Button>
       </div>
     </Nav>

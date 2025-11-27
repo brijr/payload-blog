@@ -31,10 +31,10 @@ export default async function PostPage({ params }: { params: Params }) {
     <Section>
       <Container>
         <Link
-          href="/blog"
+          href="/posts"
           className="text-sm text-muted-foreground hover:text-foreground mb-8 inline-block"
         >
-          &larr; Back to blog
+          &larr; Back to posts
         </Link>
         <Prose isArticle isSpaced>
           <h1>{post.title}</h1>

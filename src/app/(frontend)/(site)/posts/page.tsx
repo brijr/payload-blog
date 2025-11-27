@@ -3,7 +3,7 @@ import { getPayload } from 'payload'
 import config from '@payload-config'
 import Link from 'next/link'
 
-export default async function BlogPage() {
+export default async function PostsPage() {
   const payload = await getPayload({ config })
 
   const posts = await payload.find({
@@ -14,14 +14,14 @@ export default async function BlogPage() {
   return (
     <Section>
       <Container>
-        <h1 className="text-3xl font-medium tracking-tight mb-8">Blog</h1>
+        <h1 className="text-3xl font-medium tracking-tight mb-8">Posts</h1>
         {posts.docs.length === 0 ? (
           <p className="text-muted-foreground">No posts yet.</p>
         ) : (
           <ul className="space-y-6">
             {posts.docs.map((post) => (
               <li key={post.id}>
-                <Link href={`/blog/${post.slug}`} className="group block">
+                <Link href={`/posts/${post.slug}`} className="group block">
                   <h2 className="text-xl font-medium group-hover:underline">{post.title}</h2>
                   {post.publishedAt && (
                     <p className="text-sm text-muted-foreground mt-1">
