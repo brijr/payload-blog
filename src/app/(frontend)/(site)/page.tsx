@@ -13,6 +13,7 @@ const ToDelete = () => {
           <a href="https://blog.payloadstarter.dev">blog.payloadstarter.dev</a>)
         </h1>
         <p className="grid gap-1 underline text-primary">
+          <a href="/admin">Admin Dashboard &rarr;</a>
           <a href="https://github.com/brijr/payload-blog">View on GitHub &rarr;</a>
           <a href="https://payloadcms.com/docs">Read the Payload Docs &rarr;</a>
           <a href="https://payloadcms.com/docs/plugins/overview#official-plugins">
