@@ -12,7 +12,7 @@ export const Header = () => {
     >
       <Link href="/" className="flex gap-3 items-center">
         <Image src={Logo} width={14} alt="Blog" className="invert dark:invert-0" />
-        <h3 className="sm:text-lg">Blog</h3>
+        <h3 className="sm:text-lg">Payload Blog</h3>
       </Link>
       <div className="flex gap-2">
         <Button asChild variant="ghost">
