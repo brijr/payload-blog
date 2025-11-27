@@ -2,7 +2,11 @@ import type { CollectionConfig } from 'payload'
 
 export const Posts: CollectionConfig = {
   slug: 'posts',
-  versions: true,
+  versions: {
+    drafts: {
+      autosave: true,
+    },
+  },
   admin: {
     useAsTitle: 'title',
   },
