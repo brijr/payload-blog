@@ -2,6 +2,7 @@ import type { CollectionConfig } from 'payload'
 
 export const Posts: CollectionConfig = {
   slug: 'posts',
+  versions: true,
   admin: {
     useAsTitle: 'title',
   },
