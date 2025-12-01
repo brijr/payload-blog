@@ -4,8 +4,41 @@ import config from '@payload-config'
 import { notFound } from 'next/navigation'
 import { RichText } from '@payloadcms/richtext-lexical/react'
 import Link from 'next/link'
+import type { Metadata } from 'next'
+import type { Media } from '@/payload-types'
 
 type Params = Promise<{ slug: string }>
+
+export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
+  const { slug } = await params
+  const payload = await getPayload({ config })
+
+  const posts = await payload.find({
+    collection: 'posts',
+    where: { slug: { equals: slug } },
+    limit: 1,
+  })
+
+  const post = posts.docs[0]
+
+  if (!post) {
+    return { title: 'Post Not Found' }
+  }
+
+  const ogImage = post.meta?.image as Media | undefined
+
+  return {
+    title: post.meta?.title || post.title,
+    description: post.meta?.description || post.excerpt || undefined,
+    openGraph: {
+      title: post.meta?.title || post.title,
+      description: post.meta?.description || post.excerpt || undefined,
+      type: 'article',
+      publishedTime: post.publishedAt || undefined,
+      ...(ogImage?.url && { images: [{ url: ogImage.url }] }),
+    },
+  }
+}
 
 export default async function PostPage({ params }: { params: Params }) {
   const { slug } = await params
