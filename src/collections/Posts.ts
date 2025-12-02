@@ -1,5 +1,7 @@
 import type { CollectionConfig } from 'payload'
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
+
 export const Posts: CollectionConfig = {
   slug: 'posts',
   versions: {
@@ -9,6 +11,12 @@ export const Posts: CollectionConfig = {
   },
   admin: {
     useAsTitle: 'title',
+    preview: (doc, { token }) => {
+      if (doc?.slug) {
+        return `${siteUrl}/api/preview?slug=${doc.slug}&collection=posts&token=${token}`
+      }
+      return null
+    },
   },
   access: {
     read: () => true,
