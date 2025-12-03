@@ -7,8 +7,15 @@ A minimal blog starter built with Next.js 15 and Payload CMS.
 - **Blog**
   - Posts collection with rich text content
   - Dynamic routes (`/posts`, `/posts/[slug]`)
+  - Draft versioning with autosave
   - Automatic sitemap generation
   - SEO-friendly with robots.txt
+
+- **Live Preview & Preview Links**
+  - Real-time preview in admin panel as you edit
+  - Responsive breakpoints (mobile, tablet, desktop)
+  - Preview links to open drafts in new tab
+  - Draft mode with secure token authentication
 
 - **Tech Stack**
   - Next.js 15+ with App Router
@@ -102,6 +109,8 @@ EMAIL_FROM=noreply@yourdomain.com
 | `/posts` | Posts listing |
 | `/posts/[slug]` | Individual post |
 | `/admin` | Payload CMS admin |
+| `/api/preview` | Enable draft mode (used by preview links) |
+| `/api/exit-preview` | Disable draft mode |
 | `/sitemap.xml` | Auto-generated sitemap |
 | `/robots.txt` | Robots file |
 
