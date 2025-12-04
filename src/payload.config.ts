@@ -13,7 +13,7 @@ import { Users } from '@/collections/Users'
 import { Media } from '@/collections/Media'
 import { Posts } from '@/collections/Posts'
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://yourdomain.com'
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
