@@ -1,36 +1,21 @@
 import { Container, Section } from '@/components/ds'
+import { PostList } from '@/components/posts/post-list'
+import { getPayload } from 'payload'
+import config from '@payload-config'
 
 export default async function Home() {
-  return <ToDelete />
-}
+  const payload = await getPayload({ config })
 
-const ToDelete = () => {
+  const posts = await payload.find({
+    collection: 'posts',
+    sort: '-publishedAt',
+  })
+
   return (
-    <Section className="font-mono text-sm">
-      <Container className="space-y-4">
-        <h1>
-          Payload Blog Starter (
-          <a href="https://blog.payloadstarter.dev">blog.payloadstarter.dev</a>)
-        </h1>
-        <p className="grid gap-1 underline text-primary">
-          <a href="/admin">Admin Dashboard &rarr;</a>
-          <a href="https://github.com/brijr/payload-blog">View on GitHub &rarr;</a>
-          <a href="https://payloadcms.com/docs">Read the Payload Docs &rarr;</a>
-          <a href="https://payloadcms.com/docs/plugins/overview#official-plugins">
-            Explore Official Plugins &rarr;
-          </a>
-        </p>
-        <p>This starter uses Payload, Postgres, Resend, and Vercel Blob.</p>
-        <p className="mb-8">
-          Created by{' '}
-          <a className="underline text-primary" href="https://brijr.dev">
-            @brijr
-          </a>
-        </p>
-
-        <a href="https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fbrijr%2Fpayload-starter&env=DATABASE_URI,PAYLOAD_SECRET,BLOB_READ_WRITE_TOKEN,RESEND_API_KEY,EMAIL_FROM&redirect-url=https%3A%2F%2Fgithub.com%2Fbrijr%2Fpayload-starter&demo-url=https%3A%2F%2Fpayloadstarter.dev">
-          <img src="https://vercel.com/button" alt="Deploy with Vercel" />
-        </a>
+    <Section>
+      <Container>
+        <h1 className="text-3xl font-medium tracking-tight mb-8">Latest Posts</h1>
+        <PostList posts={posts.docs} />
       </Container>
     </Section>
   )
