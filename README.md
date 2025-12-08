@@ -1,118 +1,115 @@
 # Payload Blog
 
-A minimal blog starter built with Next.js 15 and Payload CMS.
+A minimal, production-ready blog starter built with Next.js 16, Payload CMS 3, and Tailwind CSS 4. Get a beautiful, fast blog up and running in minutes.
 
 ## Features
 
-- **Blog**
-  - Posts collection with rich text content
-  - Dynamic routes (`/posts`, `/posts/[slug]`)
-  - Draft versioning with autosave
-  - Automatic sitemap generation
-  - SEO-friendly with robots.txt
+**Content Management**
+- Rich text editor with Lexical
+- Draft versioning with autosave
+- Live preview as you edit
+- SEO fields on every post
 
-- **Live Preview & Preview Links**
-  - Real-time preview in admin panel as you edit
-  - Responsive breakpoints (mobile, tablet, desktop)
-  - Preview links to open drafts in new tab
-  - Draft mode with secure token authentication
+**Modern Stack**
+- Next.js 16 App Router
+- Payload CMS 3.65
+- PostgreSQL + Vercel Blob Storage
+- Tailwind CSS 4 + shadcn/ui
+- Dark/light mode
 
-- **Tech Stack**
-  - Next.js 15+ with App Router
-  - Payload CMS 3+ for content management
-  - TypeScript 5+
-  - PostgreSQL database
-  - Tailwind CSS 4+
-  - shadcn/ui components
-  - Dark/light mode
-  - Vercel Blob Storage
+**Production Ready**
+- Automatic sitemap generation
+- SEO-optimized meta tags
+- Responsive design
+- Type-safe with TypeScript
 
-## Getting Started
+## Quick Start
 
-### Prerequisites
+```bash
+# Clone and install
+git clone https://github.com/brijr/payload-blog.git
+cd payload-blog
+pnpm install
 
-- Node.js and pnpm
-- PostgreSQL database
+# Configure environment
+cp .env.example .env
+# Edit .env with your DATABASE_URI and PAYLOAD_SECRET
 
-### Installation
+# Start developing
+pnpm dev
+```
 
-1. Clone the repository:
-
-   ```bash
-   git clone https://github.com/brijr/payload-blog.git
-   cd payload-blog
-   ```
-
-2. Install dependencies:
-
-   ```bash
-   pnpm install
-   ```
-
-3. Set up environment variables:
-
-   ```bash
-   cp .env.example .env
-   ```
-
-4. Start the development server:
-
-   ```bash
-   pnpm dev
-   ```
-
-5. Visit `http://localhost:3000/admin` to create your first post.
+Open [localhost:3000/admin](http://localhost:3000/admin) to create your first post.
 
 ## Environment Variables
 
-```bash
-# Database
-DATABASE_URI=postgres://user:password@localhost:5432/dbname
-
-# Payload
-PAYLOAD_SECRET=your-secret-key-here
-
-# Site URL (for sitemap)
-NEXT_PUBLIC_SITE_URL=https://yourdomain.com
-
-# Storage
-BLOB_READ_WRITE_TOKEN=vercel_blob_xxxxxx
-
-# Email (optional)
-RESEND_API_KEY=re_xxxxxxxx
-EMAIL_FROM=noreply@yourdomain.com
-```
+| Variable | Required | Description |
+|----------|----------|-------------|
+| `DATABASE_URI` | Yes | PostgreSQL connection string |
+| `PAYLOAD_SECRET` | Yes | Secret key for Payload CMS |
+| `NEXT_PUBLIC_SITE_URL` | Yes | Your site URL (for sitemap/SEO) |
+| `BLOB_READ_WRITE_TOKEN` | Yes | Vercel Blob storage token |
+| `RESEND_API_KEY` | No | For email notifications |
+| `EMAIL_FROM` | No | Sender email address |
 
 ## Project Structure
 
 ```
-/src
-  /app
-    /(frontend)/(site)
-      /posts              # Posts listing
-      /posts/[slug]       # Individual post
-    /(payload)            # Payload CMS admin
-  /collections
-    Posts.ts              # Posts collection
-    Users.ts              # Admin users
-    Media.ts              # Media uploads
-  /components
-    /ds.tsx               # Design system (Prose, Section, Container)
-    /ui                   # shadcn/ui components
+src/
+├── app/
+│   ├── (frontend)/(site)/     # Public routes
+│   │   ├── page.tsx           # Homepage
+│   │   └── posts/             # Blog posts
+│   └── (payload)/             # Admin panel
+├── collections/
+│   ├── Posts.ts               # Blog posts
+│   ├── Media.ts               # File uploads
+│   └── Users.ts               # Admin users
+└── components/
+    ├── ds.tsx                 # Design system
+    ├── posts/                 # Post components
+    └── ui/                    # shadcn/ui
 ```
+
+## Commands
+
+| Command | Description |
+|---------|-------------|
+| `pnpm dev` | Start development server |
+| `pnpm build` | Build for production |
+| `pnpm generate:types` | Regenerate Payload types |
+| `pnpm lint` | Run ESLint |
+| `pnpm devsafe` | Clear cache and start dev |
 
 ## Routes
 
 | Route | Description |
 |-------|-------------|
 | `/` | Homepage |
-| `/posts` | Posts listing |
-| `/posts/[slug]` | Individual post |
-| `/admin` | Payload CMS admin |
-| `/api/preview` | Enable draft mode (used by preview links) |
-| `/api/exit-preview` | Disable draft mode |
+| `/posts` | All posts |
+| `/posts/[slug]` | Single post |
+| `/admin` | CMS admin panel |
 | `/sitemap.xml` | Auto-generated sitemap |
-| `/robots.txt` | Robots file |
+
+## Extending
+
+**Add a new collection:**
+1. Create `/src/collections/YourCollection.ts`
+2. Add to `collections` array in `/src/payload.config.ts`
+3. Run `pnpm generate:types`
+
+**Add a new page:**
+1. Create `/src/app/(frontend)/(site)/your-page/page.tsx`
+2. Use the design system components from `/src/components/ds.tsx`
+
+## Deploy
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/brijr/payload-blog)
+
+Or deploy manually:
+1. Set up a PostgreSQL database (Neon, Supabase, etc.)
+2. Configure environment variables
+3. Deploy to Vercel, Railway, or any Node.js host
 
 ## License
 
@@ -120,4 +117,4 @@ MIT
 
 ---
 
-Created by [brijr](https://github.com/brijr)
+Built by [brijr](https://github.com/brijr)
